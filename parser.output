@@ -1,0 +1,3118 @@
+Terminals which are not used
+
+   _NULL
+
+
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: /* empty */
+    2        | PROGRAM LINE
+
+    3 LINE: STATEMENT _SEMICOLON
+
+    4 STATEMENT: IF_STATEMENT
+    5          | ELSE_STATEMENT
+    6          | ASSIGN_STATEMENT
+    7          | FOR_STATEMENT
+    8          | WHILE_STATEMENT
+    9          | FUNCTION_STATEMENT
+   10          | RETURN_STATEMENT
+   11          | PRINT_STATEMENT
+   12          | SCAN_STATEMENT
+   13          | EXPRESSION_STATEMENT
+   14          | CLASS_STATEMENT
+   15          | DECLARATION_STATEMENT
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+   18 ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+   19 ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   23                   | _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+   24 TYPE: _INT
+   25     | _FLOAT
+   26     | _STRING
+   27     | _BOOL
+   28     | _VOID
+
+   29 PARAMS: DECLARATION_STATEMENT
+   30       | PARAMS _COMMA DECLARATION_STATEMENT
+   31       | PARAMS _COMMA _ID
+   32       | _ID
+
+   33 RETURN_STATEMENT: _RETURN EXPRESSION
+
+   34 PRINT_STATEMENT: _PRINT _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS
+
+   35 SCAN_STATEMENT: _SCAN _OPEN_PARENTHESIS _ID _CLOSE_PARENTHESIS
+
+   36 EXPRESSION_STATEMENT: EXPRESSION
+
+   37 CLASS_STATEMENT: _CLASS _ID _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+   38 DECLARATION_STATEMENT: _INT _ID
+   39                      | _FLOAT _ID
+   40                      | _STRING _ID
+   41                      | _BOOL _ID
+   42                      | _TABLEAU _ID
+   43                      | _ID _ID
+   44                      | _INT _ID _ASSIGN EXPRESSION
+   45                      | _FLOAT _ID _ASSIGN EXPRESSION
+   46                      | _STRING _ID _ASSIGN EXPRESSION
+   47                      | _BOOL _ID _ASSIGN EXPRESSION
+   48                      | _TABLEAU _ID _ASSIGN EXPRESSION
+   49                      | _ID _ID _ASSIGN EXPRESSION
+   50                      | _CONST _ID _ASSIGN EXPRESSION
+
+   51 EXPRESSION: EXPRESSION _ADD EXPRESSION
+   52           | EXPRESSION _SUB EXPRESSION
+   53           | EXPRESSION _MULT EXPRESSION
+   54           | EXPRESSION _DIV EXPRESSION
+   55           | EXPRESSION _MOD EXPRESSION
+   56           | EXPRESSION _POW EXPRESSION
+   57           | EXPRESSION _AND EXPRESSION
+   58           | EXPRESSION _OR EXPRESSION
+   59           | EXPRESSION _INFERIOR EXPRESSION
+   60           | EXPRESSION _SUPERIOR EXPRESSION
+   61           | EXPRESSION _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION _EQUAL EXPRESSION
+   64           | EXPRESSION _NON_EQUAL EXPRESSION
+   65           | _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS
+   66           | _NOT EXPRESSION
+   67           | _ID
+   68           | _INTVALUE
+   69           | _FLOATVALUE
+   70           | _BOOLVALUE
+   71           | _STRINGVALUE
+   72           | OBJECT_VALUE
+   73           | _OPEN_BRACKET TABLEVALUE _CLOSE_BRACKET
+   74           | FUNCTION_INVOCATION_STATEMENT
+   75           | ARRAY_ELEMENT
+
+   76 FUNCTION_INVOCATION_STATEMENT: _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS
+
+   77 OBJECT_VALUE: OBJECT_VALUE _DOT _ID
+   78             | _ID _DOT _ID
+
+   79 ARRAY_ELEMENT: _ID _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET
+   80              | _ID _OPEN_BRACKET _ID _CLOSE_BRACKET
+   81              | _ID _OPEN_BRACKET ARRAY_ELEMENT _CLOSE_BRACKET
+
+   82 TABLEVALUE: TABLEVALUE _COMMA EXPRESSION
+   83           | EXPRESSION_STATEMENT
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+_SCAN (258) 35
+_PRINT (259) 34
+_IF (260) 16 17
+_ELSE (261) 18
+_COMMA (262) 30 31 82
+_SEMICOLON (263) 3 20
+_DOT (264) 77 78
+_INT (265) 24 38 44
+_FLOAT (266) 25 39 45
+_STRING (267) 26 40 46
+_BOOL (268) 27 41 47
+_TABLEAU (269) 42 48
+_NULL (270)
+_FUNCTION (271) 22 23
+_CONST (272) 50
+_CLASS (273) 37
+_RETURN (274) 33
+_FOR (275) 20
+_WHILE (276) 21
+_OPEN_PARENTHESIS (277) 16 17 20 21 22 23 34 35 65 76
+_CLOSE_PARENTHESIS (278) 16 17 20 21 22 23 34 35 65 76
+_CURLY_OPEN_BRACKET (279) 16 17 18 20 21 22 23 37
+_CURLY_CLOSE_BRACKET (280) 16 17 18 20 21 22 23 37
+_OPEN_BRACKET (281) 73 79 80 81
+_CLOSE_BRACKET (282) 73 79 80 81
+_ID (283) 19 22 23 31 32 35 37 38 39 40 41 42 43 44 45 46 47 48 49
+    50 67 76 77 78 79 80 81
+_EQUAL (284) 63
+_NON_EQUAL (285) 64
+_AND (286) 57
+_OR (287) 58
+_NOT (288) 66
+_INFERIOR (289) 59
+_SUPERIOR (290) 60
+_INFERIOR_EQUAL (291) 61
+_SUPERIOR_EQUAL (292) 62
+_ADD (293) 51
+_SUB (294) 52
+_MULT (295) 53
+_DIV (296) 54
+_MOD (297) 55
+_POW (298) 56
+_ASSIGN (299) 19 44 45 46 47 48 49 50
+_INTVALUE (300) 68 79
+_FLOATVALUE (301) 69
+_BOOLVALUE (302) 70
+_STRINGVALUE (303) 71
+_VOID (304) 28
+
+
+Nonterminals, with rules where they appear
+
+$accept (50)
+    on left: 0
+PROGRAM (51)
+    on left: 1 2, on right: 0 2 16 17 18 20 21 22 23 37
+LINE (52)
+    on left: 3, on right: 2
+STATEMENT (53)
+    on left: 4 5 6 7 8 9 10 11 12 13 14 15, on right: 3
+IF_STATEMENT (54)
+    on left: 16 17, on right: 4
+ELSE_STATEMENT (55)
+    on left: 18, on right: 5 17
+ASSIGN_STATEMENT (56)
+    on left: 19, on right: 6
+FOR_STATEMENT (57)
+    on left: 20, on right: 7
+WHILE_STATEMENT (58)
+    on left: 21, on right: 8
+FUNCTION_STATEMENT (59)
+    on left: 22 23, on right: 9
+TYPE (60)
+    on left: 24 25 26 27 28, on right: 22 23
+PARAMS (61)
+    on left: 29 30 31 32, on right: 23 30 31 76
+RETURN_STATEMENT (62)
+    on left: 33, on right: 10
+PRINT_STATEMENT (63)
+    on left: 34, on right: 11
+SCAN_STATEMENT (64)
+    on left: 35, on right: 12
+EXPRESSION_STATEMENT (65)
+    on left: 36, on right: 13 83
+CLASS_STATEMENT (66)
+    on left: 37, on right: 14
+DECLARATION_STATEMENT (67)
+    on left: 38 39 40 41 42 43 44 45 46 47 48 49 50,
+    on right: 15 20 29 30
+EXPRESSION (68)
+    on left: 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
+    69 70 71 72 73 74 75, on right: 16 17 19 20 21 33 34 36 44 45 46
+    47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 82
+FUNCTION_INVOCATION_STATEMENT (69)
+    on left: 76, on right: 74
+OBJECT_VALUE (70)
+    on left: 77 78, on right: 72 77
+ARRAY_ELEMENT (71)
+    on left: 79 80 81, on right: 75 81
+TABLEVALUE (72)
+    on left: 82 83, on right: 73 82
+
+
+state 0
+
+    0 $accept: . PROGRAM $end
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 1
+
+
+state 1
+
+    0 $accept: PROGRAM . $end
+    2 PROGRAM: PROGRAM . LINE
+
+    $end               shift, and go to state 2
+    _SCAN              shift, and go to state 3
+    _PRINT             shift, and go to state 4
+    _IF                shift, and go to state 5
+    _ELSE              shift, and go to state 6
+    _INT               shift, and go to state 7
+    _FLOAT             shift, and go to state 8
+    _STRING            shift, and go to state 9
+    _BOOL              shift, and go to state 10
+    _TABLEAU           shift, and go to state 11
+    _FUNCTION          shift, and go to state 12
+    _CONST             shift, and go to state 13
+    _CLASS             shift, and go to state 14
+    _RETURN            shift, and go to state 15
+    _FOR               shift, and go to state 16
+    _WHILE             shift, and go to state 17
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 20
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 2
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+state 3
+
+   35 SCAN_STATEMENT: _SCAN . _OPEN_PARENTHESIS _ID _CLOSE_PARENTHESIS
+
+    _OPEN_PARENTHESIS  shift, and go to state 44
+
+
+state 4
+
+   34 PRINT_STATEMENT: _PRINT . _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS
+
+    _OPEN_PARENTHESIS  shift, and go to state 45
+
+
+state 5
+
+   16 IF_STATEMENT: _IF . _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF . _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+    _OPEN_PARENTHESIS  shift, and go to state 46
+
+
+state 6
+
+   18 ELSE_STATEMENT: _ELSE . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 47
+
+
+state 7
+
+   38 DECLARATION_STATEMENT: _INT . _ID
+   44                      | _INT . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 48
+
+
+state 8
+
+   39 DECLARATION_STATEMENT: _FLOAT . _ID
+   45                      | _FLOAT . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 49
+
+
+state 9
+
+   40 DECLARATION_STATEMENT: _STRING . _ID
+   46                      | _STRING . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 50
+
+
+state 10
+
+   41 DECLARATION_STATEMENT: _BOOL . _ID
+   47                      | _BOOL . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 51
+
+
+state 11
+
+   42 DECLARATION_STATEMENT: _TABLEAU . _ID
+   48                      | _TABLEAU . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 52
+
+
+state 12
+
+   22 FUNCTION_STATEMENT: _FUNCTION . TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   23                   | _FUNCTION . TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _INT     shift, and go to state 53
+    _FLOAT   shift, and go to state 54
+    _STRING  shift, and go to state 55
+    _BOOL    shift, and go to state 56
+    _VOID    shift, and go to state 57
+
+    TYPE  go to state 58
+
+
+state 13
+
+   50 DECLARATION_STATEMENT: _CONST . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 59
+
+
+state 14
+
+   37 CLASS_STATEMENT: _CLASS . _ID _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _ID  shift, and go to state 60
+
+
+state 15
+
+   33 RETURN_STATEMENT: _RETURN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 62
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 16
+
+   20 FOR_STATEMENT: _FOR . _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 63
+
+
+state 17
+
+   21 WHILE_STATEMENT: _WHILE . _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 64
+
+
+state 18
+
+   65 EXPRESSION: _OPEN_PARENTHESIS . EXPRESSION _CLOSE_PARENTHESIS
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 65
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 19
+
+   73 EXPRESSION: _OPEN_BRACKET . TABLEVALUE _CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION_STATEMENT           go to state 66
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+    TABLEVALUE                     go to state 67
+
+
+state 20
+
+   19 ASSIGN_STATEMENT: _ID . _ASSIGN EXPRESSION
+   43 DECLARATION_STATEMENT: _ID . _ID
+   49                      | _ID . _ID _ASSIGN EXPRESSION
+   67 EXPRESSION: _ID .
+   76 FUNCTION_INVOCATION_STATEMENT: _ID . _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS
+   78 OBJECT_VALUE: _ID . _DOT _ID
+   79 ARRAY_ELEMENT: _ID . _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET
+   80              | _ID . _OPEN_BRACKET _ID _CLOSE_BRACKET
+   81              | _ID . _OPEN_BRACKET ARRAY_ELEMENT _CLOSE_BRACKET
+
+    _DOT               shift, and go to state 68
+    _OPEN_PARENTHESIS  shift, and go to state 69
+    _OPEN_BRACKET      shift, and go to state 70
+    _ID                shift, and go to state 71
+    _ASSIGN            shift, and go to state 72
+
+    $default  reduce using rule 67 (EXPRESSION)
+
+
+state 21
+
+   66 EXPRESSION: _NOT . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 73
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 22
+
+   68 EXPRESSION: _INTVALUE .
+
+    $default  reduce using rule 68 (EXPRESSION)
+
+
+state 23
+
+   69 EXPRESSION: _FLOATVALUE .
+
+    $default  reduce using rule 69 (EXPRESSION)
+
+
+state 24
+
+   70 EXPRESSION: _BOOLVALUE .
+
+    $default  reduce using rule 70 (EXPRESSION)
+
+
+state 25
+
+   71 EXPRESSION: _STRINGVALUE .
+
+    $default  reduce using rule 71 (EXPRESSION)
+
+
+state 26
+
+    2 PROGRAM: PROGRAM LINE .
+
+    $default  reduce using rule 2 (PROGRAM)
+
+
+state 27
+
+    3 LINE: STATEMENT . _SEMICOLON
+
+    _SEMICOLON  shift, and go to state 74
+
+
+state 28
+
+    4 STATEMENT: IF_STATEMENT .
+
+    $default  reduce using rule 4 (STATEMENT)
+
+
+state 29
+
+    5 STATEMENT: ELSE_STATEMENT .
+
+    $default  reduce using rule 5 (STATEMENT)
+
+
+state 30
+
+    6 STATEMENT: ASSIGN_STATEMENT .
+
+    $default  reduce using rule 6 (STATEMENT)
+
+
+state 31
+
+    7 STATEMENT: FOR_STATEMENT .
+
+    $default  reduce using rule 7 (STATEMENT)
+
+
+state 32
+
+    8 STATEMENT: WHILE_STATEMENT .
+
+    $default  reduce using rule 8 (STATEMENT)
+
+
+state 33
+
+    9 STATEMENT: FUNCTION_STATEMENT .
+
+    $default  reduce using rule 9 (STATEMENT)
+
+
+state 34
+
+   10 STATEMENT: RETURN_STATEMENT .
+
+    $default  reduce using rule 10 (STATEMENT)
+
+
+state 35
+
+   11 STATEMENT: PRINT_STATEMENT .
+
+    $default  reduce using rule 11 (STATEMENT)
+
+
+state 36
+
+   12 STATEMENT: SCAN_STATEMENT .
+
+    $default  reduce using rule 12 (STATEMENT)
+
+
+state 37
+
+   13 STATEMENT: EXPRESSION_STATEMENT .
+
+    $default  reduce using rule 13 (STATEMENT)
+
+
+state 38
+
+   14 STATEMENT: CLASS_STATEMENT .
+
+    $default  reduce using rule 14 (STATEMENT)
+
+
+state 39
+
+   15 STATEMENT: DECLARATION_STATEMENT .
+
+    $default  reduce using rule 15 (STATEMENT)
+
+
+state 40
+
+   36 EXPRESSION_STATEMENT: EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 36 (EXPRESSION_STATEMENT)
+
+
+state 41
+
+   74 EXPRESSION: FUNCTION_INVOCATION_STATEMENT .
+
+    $default  reduce using rule 74 (EXPRESSION)
+
+
+state 42
+
+   72 EXPRESSION: OBJECT_VALUE .
+   77 OBJECT_VALUE: OBJECT_VALUE . _DOT _ID
+
+    _DOT  shift, and go to state 89
+
+    $default  reduce using rule 72 (EXPRESSION)
+
+
+state 43
+
+   75 EXPRESSION: ARRAY_ELEMENT .
+
+    $default  reduce using rule 75 (EXPRESSION)
+
+
+state 44
+
+   35 SCAN_STATEMENT: _SCAN _OPEN_PARENTHESIS . _ID _CLOSE_PARENTHESIS
+
+    _ID  shift, and go to state 90
+
+
+state 45
+
+   34 PRINT_STATEMENT: _PRINT _OPEN_PARENTHESIS . EXPRESSION _CLOSE_PARENTHESIS
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 91
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 46
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS . EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS . EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 92
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 47
+
+   18 ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 93
+
+
+state 48
+
+   38 DECLARATION_STATEMENT: _INT _ID .
+   44                      | _INT _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 94
+
+    $default  reduce using rule 38 (DECLARATION_STATEMENT)
+
+
+state 49
+
+   39 DECLARATION_STATEMENT: _FLOAT _ID .
+   45                      | _FLOAT _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 95
+
+    $default  reduce using rule 39 (DECLARATION_STATEMENT)
+
+
+state 50
+
+   40 DECLARATION_STATEMENT: _STRING _ID .
+   46                      | _STRING _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 96
+
+    $default  reduce using rule 40 (DECLARATION_STATEMENT)
+
+
+state 51
+
+   41 DECLARATION_STATEMENT: _BOOL _ID .
+   47                      | _BOOL _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 97
+
+    $default  reduce using rule 41 (DECLARATION_STATEMENT)
+
+
+state 52
+
+   42 DECLARATION_STATEMENT: _TABLEAU _ID .
+   48                      | _TABLEAU _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 98
+
+    $default  reduce using rule 42 (DECLARATION_STATEMENT)
+
+
+state 53
+
+   24 TYPE: _INT .
+
+    $default  reduce using rule 24 (TYPE)
+
+
+state 54
+
+   25 TYPE: _FLOAT .
+
+    $default  reduce using rule 25 (TYPE)
+
+
+state 55
+
+   26 TYPE: _STRING .
+
+    $default  reduce using rule 26 (TYPE)
+
+
+state 56
+
+   27 TYPE: _BOOL .
+
+    $default  reduce using rule 27 (TYPE)
+
+
+state 57
+
+   28 TYPE: _VOID .
+
+    $default  reduce using rule 28 (TYPE)
+
+
+state 58
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE . _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   23                   | _FUNCTION TYPE . _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _ID  shift, and go to state 99
+
+
+state 59
+
+   50 DECLARATION_STATEMENT: _CONST _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 100
+
+
+state 60
+
+   37 CLASS_STATEMENT: _CLASS _ID . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 101
+
+
+state 61
+
+   67 EXPRESSION: _ID .
+   76 FUNCTION_INVOCATION_STATEMENT: _ID . _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS
+   78 OBJECT_VALUE: _ID . _DOT _ID
+   79 ARRAY_ELEMENT: _ID . _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET
+   80              | _ID . _OPEN_BRACKET _ID _CLOSE_BRACKET
+   81              | _ID . _OPEN_BRACKET ARRAY_ELEMENT _CLOSE_BRACKET
+
+    _DOT               shift, and go to state 68
+    _OPEN_PARENTHESIS  shift, and go to state 69
+    _OPEN_BRACKET      shift, and go to state 70
+
+    $default  reduce using rule 67 (EXPRESSION)
+
+
+state 62
+
+   33 RETURN_STATEMENT: _RETURN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 33 (RETURN_STATEMENT)
+
+
+state 63
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS . DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _INT      shift, and go to state 7
+    _FLOAT    shift, and go to state 8
+    _STRING   shift, and go to state 9
+    _BOOL     shift, and go to state 10
+    _TABLEAU  shift, and go to state 11
+    _CONST    shift, and go to state 13
+    _ID       shift, and go to state 102
+
+    DECLARATION_STATEMENT  go to state 103
+
+
+state 64
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS . EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 104
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 65
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+   65           | _OPEN_PARENTHESIS EXPRESSION . _CLOSE_PARENTHESIS
+
+    _CLOSE_PARENTHESIS  shift, and go to state 105
+    _EQUAL              shift, and go to state 75
+    _NON_EQUAL          shift, and go to state 76
+    _AND                shift, and go to state 77
+    _OR                 shift, and go to state 78
+    _INFERIOR           shift, and go to state 79
+    _SUPERIOR           shift, and go to state 80
+    _INFERIOR_EQUAL     shift, and go to state 81
+    _SUPERIOR_EQUAL     shift, and go to state 82
+    _ADD                shift, and go to state 83
+    _SUB                shift, and go to state 84
+    _MULT               shift, and go to state 85
+    _DIV                shift, and go to state 86
+    _MOD                shift, and go to state 87
+    _POW                shift, and go to state 88
+
+
+state 66
+
+   83 TABLEVALUE: EXPRESSION_STATEMENT .
+
+    $default  reduce using rule 83 (TABLEVALUE)
+
+
+state 67
+
+   73 EXPRESSION: _OPEN_BRACKET TABLEVALUE . _CLOSE_BRACKET
+   82 TABLEVALUE: TABLEVALUE . _COMMA EXPRESSION
+
+    _COMMA          shift, and go to state 106
+    _CLOSE_BRACKET  shift, and go to state 107
+
+
+state 68
+
+   78 OBJECT_VALUE: _ID _DOT . _ID
+
+    _ID  shift, and go to state 108
+
+
+state 69
+
+   76 FUNCTION_INVOCATION_STATEMENT: _ID _OPEN_PARENTHESIS . PARAMS _CLOSE_PARENTHESIS
+
+    _INT      shift, and go to state 7
+    _FLOAT    shift, and go to state 8
+    _STRING   shift, and go to state 9
+    _BOOL     shift, and go to state 10
+    _TABLEAU  shift, and go to state 11
+    _CONST    shift, and go to state 13
+    _ID       shift, and go to state 109
+
+    PARAMS                 go to state 110
+    DECLARATION_STATEMENT  go to state 111
+
+
+state 70
+
+   79 ARRAY_ELEMENT: _ID _OPEN_BRACKET . _INTVALUE _CLOSE_BRACKET
+   80              | _ID _OPEN_BRACKET . _ID _CLOSE_BRACKET
+   81              | _ID _OPEN_BRACKET . ARRAY_ELEMENT _CLOSE_BRACKET
+
+    _ID        shift, and go to state 112
+    _INTVALUE  shift, and go to state 113
+
+    ARRAY_ELEMENT  go to state 114
+
+
+state 71
+
+   43 DECLARATION_STATEMENT: _ID _ID .
+   49                      | _ID _ID . _ASSIGN EXPRESSION
+
+    _ASSIGN  shift, and go to state 115
+
+    $default  reduce using rule 43 (DECLARATION_STATEMENT)
+
+
+state 72
+
+   19 ASSIGN_STATEMENT: _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 116
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 73
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+   66           | _NOT EXPRESSION .
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 66 (EXPRESSION)
+
+
+state 74
+
+    3 LINE: STATEMENT _SEMICOLON .
+
+    $default  reduce using rule 3 (LINE)
+
+
+state 75
+
+   63 EXPRESSION: EXPRESSION _EQUAL . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 117
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 76
+
+   64 EXPRESSION: EXPRESSION _NON_EQUAL . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 118
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 77
+
+   57 EXPRESSION: EXPRESSION _AND . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 119
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 78
+
+   58 EXPRESSION: EXPRESSION _OR . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 120
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 79
+
+   59 EXPRESSION: EXPRESSION _INFERIOR . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 121
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 80
+
+   60 EXPRESSION: EXPRESSION _SUPERIOR . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 122
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 81
+
+   61 EXPRESSION: EXPRESSION _INFERIOR_EQUAL . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 123
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 82
+
+   62 EXPRESSION: EXPRESSION _SUPERIOR_EQUAL . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 124
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 83
+
+   51 EXPRESSION: EXPRESSION _ADD . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 125
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 84
+
+   52 EXPRESSION: EXPRESSION _SUB . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 126
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 85
+
+   53 EXPRESSION: EXPRESSION _MULT . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 127
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 86
+
+   54 EXPRESSION: EXPRESSION _DIV . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 128
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 87
+
+   55 EXPRESSION: EXPRESSION _MOD . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 129
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 88
+
+   56 EXPRESSION: EXPRESSION _POW . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 130
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 89
+
+   77 OBJECT_VALUE: OBJECT_VALUE _DOT . _ID
+
+    _ID  shift, and go to state 131
+
+
+state 90
+
+   35 SCAN_STATEMENT: _SCAN _OPEN_PARENTHESIS _ID . _CLOSE_PARENTHESIS
+
+    _CLOSE_PARENTHESIS  shift, and go to state 132
+
+
+state 91
+
+   34 PRINT_STATEMENT: _PRINT _OPEN_PARENTHESIS EXPRESSION . _CLOSE_PARENTHESIS
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _CLOSE_PARENTHESIS  shift, and go to state 133
+    _EQUAL              shift, and go to state 75
+    _NON_EQUAL          shift, and go to state 76
+    _AND                shift, and go to state 77
+    _OR                 shift, and go to state 78
+    _INFERIOR           shift, and go to state 79
+    _SUPERIOR           shift, and go to state 80
+    _INFERIOR_EQUAL     shift, and go to state 81
+    _SUPERIOR_EQUAL     shift, and go to state 82
+    _ADD                shift, and go to state 83
+    _SUB                shift, and go to state 84
+    _MULT               shift, and go to state 85
+    _DIV                shift, and go to state 86
+    _MOD                shift, and go to state 87
+    _POW                shift, and go to state 88
+
+
+state 92
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _CLOSE_PARENTHESIS  shift, and go to state 134
+    _EQUAL              shift, and go to state 75
+    _NON_EQUAL          shift, and go to state 76
+    _AND                shift, and go to state 77
+    _OR                 shift, and go to state 78
+    _INFERIOR           shift, and go to state 79
+    _SUPERIOR           shift, and go to state 80
+    _INFERIOR_EQUAL     shift, and go to state 81
+    _SUPERIOR_EQUAL     shift, and go to state 82
+    _ADD                shift, and go to state 83
+    _SUB                shift, and go to state 84
+    _MULT               shift, and go to state 85
+    _DIV                shift, and go to state 86
+    _MOD                shift, and go to state 87
+    _POW                shift, and go to state 88
+
+
+state 93
+
+    2 PROGRAM: PROGRAM . LINE
+   18 ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 135
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 94
+
+   44 DECLARATION_STATEMENT: _INT _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 136
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 95
+
+   45 DECLARATION_STATEMENT: _FLOAT _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 137
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 96
+
+   46 DECLARATION_STATEMENT: _STRING _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 138
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 97
+
+   47 DECLARATION_STATEMENT: _BOOL _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 139
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 98
+
+   48 DECLARATION_STATEMENT: _TABLEAU _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 140
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 99
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID . _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   23                   | _FUNCTION TYPE _ID . _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 141
+
+
+state 100
+
+   50 DECLARATION_STATEMENT: _CONST _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 142
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 101
+
+   37 CLASS_STATEMENT: _CLASS _ID _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 143
+
+
+state 102
+
+   43 DECLARATION_STATEMENT: _ID . _ID
+   49                      | _ID . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 71
+
+
+state 103
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT . _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _SEMICOLON  shift, and go to state 144
+
+
+state 104
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _CLOSE_PARENTHESIS  shift, and go to state 145
+    _EQUAL              shift, and go to state 75
+    _NON_EQUAL          shift, and go to state 76
+    _AND                shift, and go to state 77
+    _OR                 shift, and go to state 78
+    _INFERIOR           shift, and go to state 79
+    _SUPERIOR           shift, and go to state 80
+    _INFERIOR_EQUAL     shift, and go to state 81
+    _SUPERIOR_EQUAL     shift, and go to state 82
+    _ADD                shift, and go to state 83
+    _SUB                shift, and go to state 84
+    _MULT               shift, and go to state 85
+    _DIV                shift, and go to state 86
+    _MOD                shift, and go to state 87
+    _POW                shift, and go to state 88
+
+
+state 105
+
+   65 EXPRESSION: _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 65 (EXPRESSION)
+
+
+state 106
+
+   82 TABLEVALUE: TABLEVALUE _COMMA . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 146
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 107
+
+   73 EXPRESSION: _OPEN_BRACKET TABLEVALUE _CLOSE_BRACKET .
+
+    $default  reduce using rule 73 (EXPRESSION)
+
+
+state 108
+
+   78 OBJECT_VALUE: _ID _DOT _ID .
+
+    $default  reduce using rule 78 (OBJECT_VALUE)
+
+
+state 109
+
+   32 PARAMS: _ID .
+   43 DECLARATION_STATEMENT: _ID . _ID
+   49                      | _ID . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 71
+
+    $default  reduce using rule 32 (PARAMS)
+
+
+state 110
+
+   30 PARAMS: PARAMS . _COMMA DECLARATION_STATEMENT
+   31       | PARAMS . _COMMA _ID
+   76 FUNCTION_INVOCATION_STATEMENT: _ID _OPEN_PARENTHESIS PARAMS . _CLOSE_PARENTHESIS
+
+    _COMMA              shift, and go to state 147
+    _CLOSE_PARENTHESIS  shift, and go to state 148
+
+
+state 111
+
+   29 PARAMS: DECLARATION_STATEMENT .
+
+    $default  reduce using rule 29 (PARAMS)
+
+
+state 112
+
+   79 ARRAY_ELEMENT: _ID . _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET
+   80              | _ID . _OPEN_BRACKET _ID _CLOSE_BRACKET
+   80              | _ID _OPEN_BRACKET _ID . _CLOSE_BRACKET
+   81              | _ID . _OPEN_BRACKET ARRAY_ELEMENT _CLOSE_BRACKET
+
+    _OPEN_BRACKET   shift, and go to state 70
+    _CLOSE_BRACKET  shift, and go to state 149
+
+
+state 113
+
+   79 ARRAY_ELEMENT: _ID _OPEN_BRACKET _INTVALUE . _CLOSE_BRACKET
+
+    _CLOSE_BRACKET  shift, and go to state 150
+
+
+state 114
+
+   81 ARRAY_ELEMENT: _ID _OPEN_BRACKET ARRAY_ELEMENT . _CLOSE_BRACKET
+
+    _CLOSE_BRACKET  shift, and go to state 151
+
+
+state 115
+
+   49 DECLARATION_STATEMENT: _ID _ID _ASSIGN . EXPRESSION
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 152
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 116
+
+   19 ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 19 (ASSIGN_STATEMENT)
+
+
+state 117
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   63           | EXPRESSION _EQUAL EXPRESSION .
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 63 (EXPRESSION)
+
+
+state 118
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+   64           | EXPRESSION _NON_EQUAL EXPRESSION .
+
+    $default  reduce using rule 64 (EXPRESSION)
+
+
+state 119
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   57           | EXPRESSION _AND EXPRESSION .
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 57 (EXPRESSION)
+
+
+state 120
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   58           | EXPRESSION _OR EXPRESSION .
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 58 (EXPRESSION)
+
+
+state 121
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   59           | EXPRESSION _INFERIOR EXPRESSION .
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 59 (EXPRESSION)
+
+
+state 122
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   60           | EXPRESSION _SUPERIOR EXPRESSION .
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 60 (EXPRESSION)
+
+
+state 123
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   61           | EXPRESSION _INFERIOR_EQUAL EXPRESSION .
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 61 (EXPRESSION)
+
+
+state 124
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION _SUPERIOR_EQUAL EXPRESSION .
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    $default  reduce using rule 62 (EXPRESSION)
+
+
+state 125
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   51           | EXPRESSION _ADD EXPRESSION .
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 51 (EXPRESSION)
+
+
+state 126
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   52           | EXPRESSION _SUB EXPRESSION .
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 52 (EXPRESSION)
+
+
+state 127
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   53           | EXPRESSION _MULT EXPRESSION .
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 53 (EXPRESSION)
+
+
+state 128
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   54           | EXPRESSION _DIV EXPRESSION .
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 54 (EXPRESSION)
+
+
+state 129
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   55           | EXPRESSION _MOD EXPRESSION .
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 55 (EXPRESSION)
+
+
+state 130
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   56           | EXPRESSION _POW EXPRESSION .
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 56 (EXPRESSION)
+
+
+state 131
+
+   77 OBJECT_VALUE: OBJECT_VALUE _DOT _ID .
+
+    $default  reduce using rule 77 (OBJECT_VALUE)
+
+
+state 132
+
+   35 SCAN_STATEMENT: _SCAN _OPEN_PARENTHESIS _ID _CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 35 (SCAN_STATEMENT)
+
+
+state 133
+
+   34 PRINT_STATEMENT: _PRINT _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 34 (PRINT_STATEMENT)
+
+
+state 134
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 153
+
+
+state 135
+
+   18 ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 18 (ELSE_STATEMENT)
+
+
+state 136
+
+   44 DECLARATION_STATEMENT: _INT _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 44 (DECLARATION_STATEMENT)
+
+
+state 137
+
+   45 DECLARATION_STATEMENT: _FLOAT _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 45 (DECLARATION_STATEMENT)
+
+
+state 138
+
+   46 DECLARATION_STATEMENT: _STRING _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 46 (DECLARATION_STATEMENT)
+
+
+state 139
+
+   47 DECLARATION_STATEMENT: _BOOL _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 47 (DECLARATION_STATEMENT)
+
+
+state 140
+
+   48 DECLARATION_STATEMENT: _TABLEAU _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 48 (DECLARATION_STATEMENT)
+
+
+state 141
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   23                   | _FUNCTION TYPE _ID _OPEN_PARENTHESIS . PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _INT                shift, and go to state 7
+    _FLOAT              shift, and go to state 8
+    _STRING             shift, and go to state 9
+    _BOOL               shift, and go to state 10
+    _TABLEAU            shift, and go to state 11
+    _CONST              shift, and go to state 13
+    _CLOSE_PARENTHESIS  shift, and go to state 154
+    _ID                 shift, and go to state 109
+
+    PARAMS                 go to state 155
+    DECLARATION_STATEMENT  go to state 111
+
+
+state 142
+
+   50 DECLARATION_STATEMENT: _CONST _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 50 (DECLARATION_STATEMENT)
+
+
+state 143
+
+    2 PROGRAM: PROGRAM . LINE
+   37 CLASS_STATEMENT: _CLASS _ID _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 156
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 144
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON . EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 157
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 145
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 158
+
+
+state 146
+
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+   82 TABLEVALUE: TABLEVALUE _COMMA EXPRESSION .
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 82 (TABLEVALUE)
+
+
+state 147
+
+   30 PARAMS: PARAMS _COMMA . DECLARATION_STATEMENT
+   31       | PARAMS _COMMA . _ID
+
+    _INT      shift, and go to state 7
+    _FLOAT    shift, and go to state 8
+    _STRING   shift, and go to state 9
+    _BOOL     shift, and go to state 10
+    _TABLEAU  shift, and go to state 11
+    _CONST    shift, and go to state 13
+    _ID       shift, and go to state 159
+
+    DECLARATION_STATEMENT  go to state 160
+
+
+state 148
+
+   76 FUNCTION_INVOCATION_STATEMENT: _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS .
+
+    $default  reduce using rule 76 (FUNCTION_INVOCATION_STATEMENT)
+
+
+state 149
+
+   80 ARRAY_ELEMENT: _ID _OPEN_BRACKET _ID _CLOSE_BRACKET .
+
+    $default  reduce using rule 80 (ARRAY_ELEMENT)
+
+
+state 150
+
+   79 ARRAY_ELEMENT: _ID _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET .
+
+    $default  reduce using rule 79 (ARRAY_ELEMENT)
+
+
+state 151
+
+   81 ARRAY_ELEMENT: _ID _OPEN_BRACKET ARRAY_ELEMENT _CLOSE_BRACKET .
+
+    $default  reduce using rule 81 (ARRAY_ELEMENT)
+
+
+state 152
+
+   49 DECLARATION_STATEMENT: _ID _ID _ASSIGN EXPRESSION .
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+    $default  reduce using rule 49 (DECLARATION_STATEMENT)
+
+
+state 153
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 161
+
+
+state 154
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 162
+
+
+state 155
+
+   23 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   30 PARAMS: PARAMS . _COMMA DECLARATION_STATEMENT
+   31       | PARAMS . _COMMA _ID
+
+    _COMMA              shift, and go to state 147
+    _CLOSE_PARENTHESIS  shift, and go to state 163
+
+
+state 156
+
+   37 CLASS_STATEMENT: _CLASS _ID _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 37 (CLASS_STATEMENT)
+
+
+state 157
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION . _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _SEMICOLON       shift, and go to state 164
+    _EQUAL           shift, and go to state 75
+    _NON_EQUAL       shift, and go to state 76
+    _AND             shift, and go to state 77
+    _OR              shift, and go to state 78
+    _INFERIOR        shift, and go to state 79
+    _SUPERIOR        shift, and go to state 80
+    _INFERIOR_EQUAL  shift, and go to state 81
+    _SUPERIOR_EQUAL  shift, and go to state 82
+    _ADD             shift, and go to state 83
+    _SUB             shift, and go to state 84
+    _MULT            shift, and go to state 85
+    _DIV             shift, and go to state 86
+    _MOD             shift, and go to state 87
+    _POW             shift, and go to state 88
+
+
+state 158
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 165
+
+
+state 159
+
+   31 PARAMS: PARAMS _COMMA _ID .
+   43 DECLARATION_STATEMENT: _ID . _ID
+   49                      | _ID . _ID _ASSIGN EXPRESSION
+
+    _ID  shift, and go to state 71
+
+    $default  reduce using rule 31 (PARAMS)
+
+
+state 160
+
+   30 PARAMS: PARAMS _COMMA DECLARATION_STATEMENT .
+
+    $default  reduce using rule 30 (PARAMS)
+
+
+state 161
+
+    2 PROGRAM: PROGRAM . LINE
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET ELSE_STATEMENT
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 166
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 162
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 167
+
+
+state 163
+
+   23 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 168
+
+
+state 164
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON . EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _OPEN_PARENTHESIS  shift, and go to state 18
+    _OPEN_BRACKET      shift, and go to state 19
+    _ID                shift, and go to state 61
+    _NOT               shift, and go to state 21
+    _INTVALUE          shift, and go to state 22
+    _FLOATVALUE        shift, and go to state 23
+    _BOOLVALUE         shift, and go to state 24
+    _STRINGVALUE       shift, and go to state 25
+
+    EXPRESSION                     go to state 169
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 165
+
+    2 PROGRAM: PROGRAM . LINE
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 170
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 166
+
+   16 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+   17             | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET . ELSE_STATEMENT
+
+    _ELSE  shift, and go to state 6
+
+    $default  reduce using rule 16 (IF_STATEMENT)
+
+    ELSE_STATEMENT  go to state 171
+
+
+state 167
+
+    2 PROGRAM: PROGRAM . LINE
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 172
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 168
+
+   23 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 173
+
+
+state 169
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION . _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+   51 EXPRESSION: EXPRESSION . _ADD EXPRESSION
+   52           | EXPRESSION . _SUB EXPRESSION
+   53           | EXPRESSION . _MULT EXPRESSION
+   54           | EXPRESSION . _DIV EXPRESSION
+   55           | EXPRESSION . _MOD EXPRESSION
+   56           | EXPRESSION . _POW EXPRESSION
+   57           | EXPRESSION . _AND EXPRESSION
+   58           | EXPRESSION . _OR EXPRESSION
+   59           | EXPRESSION . _INFERIOR EXPRESSION
+   60           | EXPRESSION . _SUPERIOR EXPRESSION
+   61           | EXPRESSION . _INFERIOR_EQUAL EXPRESSION
+   62           | EXPRESSION . _SUPERIOR_EQUAL EXPRESSION
+   63           | EXPRESSION . _EQUAL EXPRESSION
+   64           | EXPRESSION . _NON_EQUAL EXPRESSION
+
+    _CLOSE_PARENTHESIS  shift, and go to state 174
+    _EQUAL              shift, and go to state 75
+    _NON_EQUAL          shift, and go to state 76
+    _AND                shift, and go to state 77
+    _OR                 shift, and go to state 78
+    _INFERIOR           shift, and go to state 79
+    _SUPERIOR           shift, and go to state 80
+    _INFERIOR_EQUAL     shift, and go to state 81
+    _SUPERIOR_EQUAL     shift, and go to state 82
+    _ADD                shift, and go to state 83
+    _SUB                shift, and go to state 84
+    _MULT               shift, and go to state 85
+    _DIV                shift, and go to state 86
+    _MOD                shift, and go to state 87
+    _POW                shift, and go to state 88
+
+
+state 170
+
+   21 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 21 (WHILE_STATEMENT)
+
+
+state 171
+
+   17 IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT .
+
+    $default  reduce using rule 17 (IF_STATEMENT)
+
+
+state 172
+
+   22 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 22 (FUNCTION_STATEMENT)
+
+
+state 173
+
+    2 PROGRAM: PROGRAM . LINE
+   23 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 175
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 174
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS . _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
+
+    _CURLY_OPEN_BRACKET  shift, and go to state 176
+
+
+state 175
+
+   23 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 23 (FUNCTION_STATEMENT)
+
+
+state 176
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET . PROGRAM _CURLY_CLOSE_BRACKET
+
+    $default  reduce using rule 1 (PROGRAM)
+
+    PROGRAM  go to state 177
+
+
+state 177
+
+    2 PROGRAM: PROGRAM . LINE
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM . _CURLY_CLOSE_BRACKET
+
+    _SCAN                 shift, and go to state 3
+    _PRINT                shift, and go to state 4
+    _IF                   shift, and go to state 5
+    _ELSE                 shift, and go to state 6
+    _INT                  shift, and go to state 7
+    _FLOAT                shift, and go to state 8
+    _STRING               shift, and go to state 9
+    _BOOL                 shift, and go to state 10
+    _TABLEAU              shift, and go to state 11
+    _FUNCTION             shift, and go to state 12
+    _CONST                shift, and go to state 13
+    _CLASS                shift, and go to state 14
+    _RETURN               shift, and go to state 15
+    _FOR                  shift, and go to state 16
+    _WHILE                shift, and go to state 17
+    _OPEN_PARENTHESIS     shift, and go to state 18
+    _CURLY_CLOSE_BRACKET  shift, and go to state 178
+    _OPEN_BRACKET         shift, and go to state 19
+    _ID                   shift, and go to state 20
+    _NOT                  shift, and go to state 21
+    _INTVALUE             shift, and go to state 22
+    _FLOATVALUE           shift, and go to state 23
+    _BOOLVALUE            shift, and go to state 24
+    _STRINGVALUE          shift, and go to state 25
+
+    LINE                           go to state 26
+    STATEMENT                      go to state 27
+    IF_STATEMENT                   go to state 28
+    ELSE_STATEMENT                 go to state 29
+    ASSIGN_STATEMENT               go to state 30
+    FOR_STATEMENT                  go to state 31
+    WHILE_STATEMENT                go to state 32
+    FUNCTION_STATEMENT             go to state 33
+    RETURN_STATEMENT               go to state 34
+    PRINT_STATEMENT                go to state 35
+    SCAN_STATEMENT                 go to state 36
+    EXPRESSION_STATEMENT           go to state 37
+    CLASS_STATEMENT                go to state 38
+    DECLARATION_STATEMENT          go to state 39
+    EXPRESSION                     go to state 40
+    FUNCTION_INVOCATION_STATEMENT  go to state 41
+    OBJECT_VALUE                   go to state 42
+    ARRAY_ELEMENT                  go to state 43
+
+
+state 178
+
+   20 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET .
+
+    $default  reduce using rule 20 (FOR_STATEMENT)
