@@ -1,0 +1,67 @@
+INT at line 1 on char 1 
+Identifier at line 1 on char 5  
+ASSIGN at line 1 on char 6  
+INTVALUE at line 1 on char 7 
+End of line at line 1 on char 8  
+INT at line 2 on char 1 
+Identifier at line 2 on char 5  
+ASSIGN at line 2 on char 7  
+INTVALUE at line 2 on char 8 
+End of line at line 2 on char 9  
+Identifier at line 3 on char 1  
+ASSIGN at line 3 on char 2  
+Identifier at line 3 on char 3  
+End of line at line 3 on char 5  
+FLOAT at line 4 on char 1 
+Identifier at line 4 on char 7  
+ASSIGN at line 4 on char 8  
+FLOATVALUE at line 4 on char 9 
+End of line at line 4 on char 12  
+Identifier at line 5 on char 1  
+ASSIGN at line 5 on char 2  
+FLOATVALUE at line 5 on char 3 
+End of line at line 5 on char 6  
+BOOL at line 6 on char 1 
+Identifier at line 6 on char 6  
+ASSIGN at line 6 on char 8  
+BOOLVALUE at line 6 on char 10 
+End of line at line 6 on char 15  
+STRING at line 7 on char 1 
+Identifier at line 7 on char 8  
+End of line at line 7 on char 9  
+Identifier at line 8 on char 1  
+ASSIGN at line 8 on char 2  
+STRINGVALUE at line 8 on char 3 
+End of line at line 8 on char 9  
+Constant declaration at line 9 on char 1  
+Identifier at line 9 on char 7  
+ASSIGN at line 9 on char 8  
+INTVALUE at line 9 on char 9 
+End of line at line 9 on char 10  
+comment at line 10 on char 1 
+comment at line 11 on char 1 
+Output at line 12 on char 1  
+Open Parenthesis at line 12 on char 6  
+Identifier at line 12 on char 7  
+Close Parenthesis at line 12 on char 8  
+End of line at line 12 on char 9  
+INT at line 13 on char 1 
+Identifier at line 13 on char 5  
+End of line at line 13 on char 10  
+Identifier at line 14 on char 1  
+ASSIGN at line 14 on char 6  
+Identifier at line 14 on char 7  
+ADD at line 14 on char 8  
+Identifier at line 14 on char 9  
+End of line at line 14 on char 11  
+Symbol Table : 
+name: a || type: 0  ||  place: 47580152  || value: 7 
+name: ab || type: 0  ||  place: 47580856  || value: 7 
+name: b || type: 1  ||  place: 47581560  || value: 2.000000 
+name: c || type: 2  ||  place: 47582264  || value: false 
+name: x || type: 3  ||  place: 47582968  || value: hiii 
+name: y || type: 0  ||  place: 47583672  || value: 4 
+name: alpha || type: 0  ||  place: 47584376  || value: 7 
+---- Quadruples:---- 
+instruction:   || op1: 0x0  || op2: 0x0  || result: 0x0 
+instruction: ADD  || op1: 0x11304  || op2: 0x11304  || result: 0x0 

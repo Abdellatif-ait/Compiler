@@ -78,7 +78,6 @@ ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET {
 }
 ;
 ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION {
-    printf('assign statement');
     struct Symbol* var= lookup_symbol($1);
     if(var == NULL){
         printf("Variable %s not declared \n", $1);
@@ -88,15 +87,11 @@ ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION {
         printf("Type mismatch in assignment \n");
         exit(1);
     }
-    // gen("EQ", $3->place, -1, var->place);
+    gen("EQ",$3->place,-1,var->place)
 }
 ;
 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET {
-    // int for_start = nextquad();
-    // backpatch($3->nextlist, for_start);
-    // int for_end = nextquad();
-    // gen("jump", -1, -1, for_start);
-    // backpatch($5->truelist, for_end);
+
 }
 ;
 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET{
@@ -310,12 +305,15 @@ DECLARATION_STATEMENT: _INT _ID {
 }
 ;
 EXPRESSION: EXPRESSION _ADD EXPRESSION { 
+    struct Symbol sym;
+    $$=&sym;
     if($1->type != $3->type){
         printf("Type mismatch in addition \n");
         exit(1);
     }
-    // int quad= nextquad();
-    // gen("ADD", $1->place, $3->place, quad);
+    int quad= nextquad();
+    $$->place=quad;
+    gen("ADD", $1->value, $3->value, quad);
 }
 | EXPRESSION _SUB EXPRESSION { 
   if($1->type != $3->type){
@@ -323,7 +321,7 @@ EXPRESSION: EXPRESSION _ADD EXPRESSION {
         exit(1);
     }
     // int quad= nextquad();
-    // gen("SUB", $1->place, $3->place, quad);
+    // gen("SUB", $1->value, $3->value, quad);
 }
 | EXPRESSION _MULT EXPRESSION { 
   if($1->type != $3->type){
@@ -431,11 +429,11 @@ EXPRESSION: EXPRESSION _ADD EXPRESSION {
 }
 | _ID {
     struct Symbol* var = lookup_symbol($1);
-    if(var != NULL){
-        printf("Variable %s already declared \n", $1);
+    if(var == NULL){
+        printf("Variable %s not declared \n", $1);
         exit(1);
     }
-    $$=&var;
+    $$=var;
     // int quad= nextquad();
     // // gen("EQ", $1->place,-1, quad);
 }
@@ -459,15 +457,25 @@ EXPRESSION: EXPRESSION _ADD EXPRESSION {
     struct Symbol symbol;
     $$=&symbol;
     bool* value = malloc(sizeof(bool));
-    *value = $1;
+
+    if(strcmp($1, "true") == 0){
+        value = true;
+    }else{
+        value = false;
+    }
+
+    $$->type=BOOL;
     $$->value=value;
 }
 | _STRINGVALUE {
     struct Symbol symbol;
      $$=&symbol;
-    bool* value = malloc(sizeof(char[255]));
-    *value = $1;
-    $$->value=value;
+    char value[255];
+    strcpy(value,$1);
+    char *result = value+1; 
+    result[strlen(result)-1] = '\0'; 
+    $$->type=STRING;
+    $$->value=result;
 
 }
 | OBJECT_VALUE {
@@ -530,8 +538,10 @@ TABLEVALUE : TABLEVALUE _COMMA EXPRESSION
 main(int argc, char **argv)
 {
     init_symbol_table(); 
+    initQuad();
     yyparse();
     print_table();
+    printQuad();
 }
 
 yyerror(char *s)

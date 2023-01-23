@@ -1,14 +1,17 @@
 #define MAX_QUADRUPLES 1000
 
-struct Quadruple {
+struct Quadruple
+{
     char op[255];
-    int arg1;
-    int arg2;
-    int result;
+    void *arg1;
+    void *arg2;
+    void *result;
 };
 
 extern struct Quadruple quadruples[MAX_QUADRUPLES];
 
 int nextquad();
-void gen(char op[], int arg1, int arg2, int result);
-void backpatch(int quad, int result);
+void initQuad();
+void gen(char op[], void *arg1, void *arg2, void *result);
+void backpatch(int quad, void *result);
+void printQuad();

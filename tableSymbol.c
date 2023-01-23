@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "tableSymbol.h"
 
 struct SymbolTable symbol_table;
@@ -98,7 +99,33 @@ void print_table()
     printf("Symbol Table : \n");
     for (int i = 0; i < symbol_table.count; i++)
     {
+        switch (symbol_table.symbols[i].type)
+        {
+        case INT:
+            printf("name: %s || type: %d  ||  place: %d  || value: %d \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, *(int *)symbol_table.symbols[i].value);
+            break;
+        case REAL:
 
-        printf("name: %s || type: %d  ||  place: %d  || value: %f \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, &(symbol_table.symbols[i].value));
+            printf("name: %s || type: %d  ||  place: %d  || value: %f \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, *(float *)symbol_table.symbols[i].value);
+            break;
+        case STRING:
+
+            printf("name: %s || type: %d  ||  place: %d  || value: %s \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, (char *)symbol_table.symbols[i].value);
+            break;
+        case BOOL:
+            if (*(bool *)symbol_table.symbols[i].value == false)
+            {
+                printf("name: %s || type: %d  ||  place: %d  || value: %s \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, "false");
+            }
+            else
+            {
+                printf("name: %s || type: %d  ||  place: %d  || value: %s \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, "true");
+            }
+
+            break;
+        default:
+            printf("name: %s || type: %d  ||  place: %d  || value: %d \n", symbol_table.symbols[i].name, symbol_table.symbols[i].type, &symbol_table.symbols[i].place, *(int *)symbol_table.symbols[i].value);
+            break;
+        }
     }
 }

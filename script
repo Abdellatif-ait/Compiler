@@ -1,0 +1,1 @@
+flex scanner.l && bison -d parser.y && gcc lex.yy.c parser.tab.c tableSymbol.c quad.c -o prog && ./prog <Exemple.txt >output.txt

@@ -1,13 +1,20 @@
 int a=2;
-h=1;
+int ab=7;
+a= ab;
 float b=3.0;
-bool c;
+b=2.0;
+bool c = false;
 string x;
+x="hiii";
 const y=4;
 /*Hi this is a comment*/
 #this is a comment too
-function void myfunc(){};
 print(a);
+int alpha;
+alpha=a+ab;
 
+for(int index=0;ab;index+1){
+    a=a+1;
+};
 
-
+// nro7 njib code te3 for w nji

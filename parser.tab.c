@@ -553,13 +553,13 @@ static const yytype_uint16 yyrline[] =
 {
        0,    44,    44,    46,    49,    52,    53,    54,    55,    56,
       57,    58,    59,    60,    61,    62,    63,    65,    69,    75,
-      80,    94,   102,   107,   110,   114,   117,   120,   123,   126,
-     130,   133,   136,   139,   143,   145,   147,   149,   151,   153,
-     164,   174,   184,   194,   204,   207,   219,   231,   244,   258,
-     272,   284,   312,   320,   328,   336,   344,   352,   360,   368,
-     376,   384,   392,   400,   408,   416,   424,   428,   432,   442,
-     450,   458,   465,   473,   480,   483,   487,   493,   507,   508,
-     510,   520,   521,   523,   524
+      80,    93,   101,   106,   109,   113,   116,   119,   122,   125,
+     129,   132,   135,   138,   142,   144,   146,   148,   150,   152,
+     163,   173,   183,   193,   203,   206,   218,   230,   243,   257,
+     271,   283,   311,   322,   330,   338,   346,   354,   362,   370,
+     378,   386,   394,   402,   410,   418,   426,   430,   434,   444,
+     452,   460,   474,   485,   492,   495,   499,   505,   519,   520,
+     522,   532,   533,   535,   536
 };
 #endif
 
@@ -1724,7 +1724,6 @@ yyreduce:
   case 20:
 #line 80 "parser.y"
     {
-    printf('assign statement');
     struct Symbol* var= lookup_symbol((yyvsp[(1) - (3)].string));
     if(var == NULL){
         printf("Variable %s not declared \n", (yyvsp[(1) - (3)].string));
@@ -1734,23 +1733,23 @@ yyreduce:
         printf("Type mismatch in assignment \n");
         exit(1);
     }
-    // gen("EQ", $3->place, -1, var->place);
+    gen("EQ",(yyvsp[(3) - (3)].symbol)->place,-1,var->place)
 ;}
     break;
 
   case 21:
-#line 94 "parser.y"
+#line 93 "parser.y"
     {
-    // int for_start = nextquad();
-    // backpatch($3->nextlist, for_start);
-    // int for_end = nextquad();
-    // gen("jump", -1, -1, for_start);
-    // backpatch($5->truelist, for_end);
+    int for_start = nextquad();
+    backpatch((yyvsp[(3) - (11)].symbol)->nextlist, for_start);
+    int for_end = nextquad();
+    gen("jump", -1, -1, for_start);
+    backpatch((yyvsp[(5) - (11)].symbol)->truelist, for_end);
 ;}
     break;
 
   case 22:
-#line 102 "parser.y"
+#line 101 "parser.y"
     {
     // // // backpatch($3->truelist, nextquad());
     // // // backpatch($5->falselist, nextquad());
@@ -1758,84 +1757,84 @@ yyreduce:
     break;
 
   case 23:
-#line 107 "parser.y"
+#line 106 "parser.y"
     {
     // // backpatch($7->falselist, nextquad());
 ;}
     break;
 
   case 24:
-#line 110 "parser.y"
+#line 109 "parser.y"
     {
     // // backpatch($8->falselist, nextquad());
 ;}
     break;
 
   case 25:
-#line 114 "parser.y"
+#line 113 "parser.y"
     {
     strcpy((yyval.string),(yyvsp[(1) - (1)].string));
 ;}
     break;
 
   case 26:
-#line 117 "parser.y"
+#line 116 "parser.y"
     {
     strcpy((yyval.string),(yyvsp[(1) - (1)].string));
 ;}
     break;
 
   case 27:
-#line 120 "parser.y"
+#line 119 "parser.y"
     {
     strcpy((yyval.string),(yyvsp[(1) - (1)].string));
 ;}
     break;
 
   case 28:
-#line 123 "parser.y"
+#line 122 "parser.y"
     {
     strcpy((yyval.string),(yyvsp[(1) - (1)].string));
 ;}
     break;
 
   case 29:
-#line 126 "parser.y"
+#line 125 "parser.y"
     {
     strcpy((yyval.string),(yyvsp[(1) - (1)].string));
 ;}
     break;
 
   case 30:
-#line 130 "parser.y"
+#line 129 "parser.y"
     {
     (yyval.symbol) = (yyvsp[(1) - (1)].symbol);
 ;}
     break;
 
   case 31:
-#line 133 "parser.y"
+#line 132 "parser.y"
     {
     (yyval.symbol) = (yyvsp[(1) - (3)].symbol);
 ;}
     break;
 
   case 32:
-#line 136 "parser.y"
+#line 135 "parser.y"
     {
     (yyval.symbol) = (yyvsp[(1) - (3)].symbol);
 ;}
     break;
 
   case 33:
-#line 139 "parser.y"
+#line 138 "parser.y"
     {
     (yyval.symbol) = (yyvsp[(1) - (1)].string);
 ;}
     break;
 
   case 39:
-#line 153 "parser.y"
+#line 152 "parser.y"
     {
 
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (2)].string));
@@ -1850,7 +1849,7 @@ yyreduce:
     break;
 
   case 40:
-#line 164 "parser.y"
+#line 163 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (2)].string));
     if(var != NULL){
@@ -1864,7 +1863,7 @@ yyreduce:
     break;
 
   case 41:
-#line 174 "parser.y"
+#line 173 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (2)].string));
     if(var != NULL){
@@ -1878,7 +1877,7 @@ yyreduce:
     break;
 
   case 42:
-#line 184 "parser.y"
+#line 183 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (2)].string));
     if(var != NULL){
@@ -1892,7 +1891,7 @@ yyreduce:
     break;
 
   case 43:
-#line 194 "parser.y"
+#line 193 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (2)].string));
     if(var != NULL){
@@ -1906,14 +1905,14 @@ yyreduce:
     break;
 
   case 44:
-#line 204 "parser.y"
+#line 203 "parser.y"
     {
 //   TODO
 ;}
     break;
 
   case 45:
-#line 207 "parser.y"
+#line 206 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -1929,7 +1928,7 @@ yyreduce:
     break;
 
   case 46:
-#line 219 "parser.y"
+#line 218 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -1945,7 +1944,7 @@ yyreduce:
     break;
 
   case 47:
-#line 231 "parser.y"
+#line 230 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -1962,7 +1961,7 @@ yyreduce:
     break;
 
   case 48:
-#line 244 "parser.y"
+#line 243 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -1980,7 +1979,7 @@ yyreduce:
     break;
 
   case 49:
-#line 258 "parser.y"
+#line 257 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -1998,7 +1997,7 @@ yyreduce:
     break;
 
   case 50:
-#line 272 "parser.y"
+#line 271 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var == NULL){
@@ -2014,7 +2013,7 @@ yyreduce:
     break;
 
   case 51:
-#line 284 "parser.y"
+#line 283 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(2) - (4)].string));
     if(var != NULL){
@@ -2045,31 +2044,34 @@ yyreduce:
     break;
 
   case 52:
-#line 312 "parser.y"
+#line 311 "parser.y"
     { 
+    struct Symbol sym;
+    (yyval.symbol)=&sym;
     if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
         exit(1);
     }
-    // int quad= nextquad();
-    // gen("ADD", $1->place, $3->place, quad);
+    int quad= nextquad();
+    (yyval.symbol)->place=quad;
+    gen("ADD", (yyvsp[(1) - (3)].symbol)->value, (yyvsp[(3) - (3)].symbol)->value, quad);
 ;}
     break;
 
   case 53:
-#line 320 "parser.y"
+#line 322 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
         exit(1);
     }
     // int quad= nextquad();
-    // gen("SUB", $1->place, $3->place, quad);
+    // gen("SUB", $1->value, $3->value, quad);
 ;}
     break;
 
   case 54:
-#line 328 "parser.y"
+#line 330 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2081,7 +2083,7 @@ yyreduce:
     break;
 
   case 55:
-#line 336 "parser.y"
+#line 338 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2093,7 +2095,7 @@ yyreduce:
     break;
 
   case 56:
-#line 344 "parser.y"
+#line 346 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2105,7 +2107,7 @@ yyreduce:
     break;
 
   case 57:
-#line 352 "parser.y"
+#line 354 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2117,7 +2119,7 @@ yyreduce:
     break;
 
   case 58:
-#line 360 "parser.y"
+#line 362 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2129,7 +2131,7 @@ yyreduce:
     break;
 
   case 59:
-#line 368 "parser.y"
+#line 370 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2141,7 +2143,7 @@ yyreduce:
     break;
 
   case 60:
-#line 376 "parser.y"
+#line 378 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2153,7 +2155,7 @@ yyreduce:
     break;
 
   case 61:
-#line 384 "parser.y"
+#line 386 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2165,7 +2167,7 @@ yyreduce:
     break;
 
   case 62:
-#line 392 "parser.y"
+#line 394 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2177,7 +2179,7 @@ yyreduce:
     break;
 
   case 63:
-#line 400 "parser.y"
+#line 402 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2189,7 +2191,7 @@ yyreduce:
     break;
 
   case 64:
-#line 408 "parser.y"
+#line 410 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2201,7 +2203,7 @@ yyreduce:
     break;
 
   case 65:
-#line 416 "parser.y"
+#line 418 "parser.y"
     { 
   if((yyvsp[(1) - (3)].symbol)->type != (yyvsp[(3) - (3)].symbol)->type){
         printf("Type mismatch in addition \n");
@@ -2213,7 +2215,7 @@ yyreduce:
     break;
 
   case 66:
-#line 424 "parser.y"
+#line 426 "parser.y"
     { 
     // int quad= nextquad();
     // gen("EQ", $2->place,-1, quad);
@@ -2221,7 +2223,7 @@ yyreduce:
     break;
 
   case 67:
-#line 428 "parser.y"
+#line 430 "parser.y"
     { 
     // int quad= nextquad();
     // gen("NOT", $2->place,-1, quad);
@@ -2229,21 +2231,21 @@ yyreduce:
     break;
 
   case 68:
-#line 432 "parser.y"
+#line 434 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(1) - (1)].string));
-    if(var != NULL){
-        printf("Variable %s already declared \n", (yyvsp[(1) - (1)].string));
+    if(var == NULL){
+        printf("Variable %s not declared \n", (yyvsp[(1) - (1)].string));
         exit(1);
     }
-    (yyval.symbol)=&var;
+    (yyval.symbol)=var;
     // int quad= nextquad();
     // // gen("EQ", $1->place,-1, quad);
 ;}
     break;
 
   case 69:
-#line 442 "parser.y"
+#line 444 "parser.y"
     {
     struct Symbol symbol;
     (yyval.symbol)=&symbol;
@@ -2255,7 +2257,7 @@ yyreduce:
     break;
 
   case 70:
-#line 450 "parser.y"
+#line 452 "parser.y"
     {
     struct Symbol symbol;
     (yyval.symbol)=&symbol;
@@ -2267,30 +2269,40 @@ yyreduce:
     break;
 
   case 71:
-#line 458 "parser.y"
+#line 460 "parser.y"
     {
     struct Symbol symbol;
     (yyval.symbol)=&symbol;
     bool* value = malloc(sizeof(bool));
-    *value = (yyvsp[(1) - (1)].string);
+
+    if(strcmp((yyvsp[(1) - (1)].string), "true") == 0){
+        value = true;
+    }else{
+        value = false;
+    }
+
+    (yyval.symbol)->type=BOOL;
     (yyval.symbol)->value=value;
 ;}
     break;
 
   case 72:
-#line 465 "parser.y"
+#line 474 "parser.y"
     {
     struct Symbol symbol;
      (yyval.symbol)=&symbol;
-    bool* value = malloc(sizeof(char[255]));
-    *value = (yyvsp[(1) - (1)].string);
-    (yyval.symbol)->value=value;
+    char value[255];
+    strcpy(value,(yyvsp[(1) - (1)].string));
+    char *result = value+1; 
+    result[strlen(result)-1] = '\0'; 
+    (yyval.symbol)->type=STRING;
+    (yyval.symbol)->value=result;
 
 ;}
     break;
 
   case 73:
-#line 473 "parser.y"
+#line 485 "parser.y"
     {
     // struct Symbol symbol;
     // $$=&symbol;
@@ -2301,14 +2313,14 @@ yyreduce:
     break;
 
   case 74:
-#line 480 "parser.y"
+#line 492 "parser.y"
     {
     // $$=$2;
 ;}
     break;
 
   case 75:
-#line 483 "parser.y"
+#line 495 "parser.y"
     {
     // int quad= nextquad();
     //  gen("EQ", $1->place,-1, quad);
@@ -2316,7 +2328,7 @@ yyreduce:
     break;
 
   case 76:
-#line 487 "parser.y"
+#line 499 "parser.y"
     {
     // // int quad= nextquad();
     // //  gen("EQ", $1->place,-1, quad);
@@ -2324,7 +2336,7 @@ yyreduce:
     break;
 
   case 77:
-#line 493 "parser.y"
+#line 505 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(1) - (4)].string));
     if(var == NULL){
@@ -2341,17 +2353,17 @@ yyreduce:
     break;
 
   case 78:
-#line 507 "parser.y"
+#line 519 "parser.y"
     {;}
     break;
 
   case 79:
-#line 508 "parser.y"
+#line 520 "parser.y"
     {;}
     break;
 
   case 80:
-#line 510 "parser.y"
+#line 522 "parser.y"
     {
     struct Symbol* var = lookup_symbol((yyvsp[(1) - (4)].string));
     if(var == NULL){
@@ -2366,7 +2378,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2370 "parser.tab.c"
+#line 2382 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2580,13 +2592,15 @@ yyreturn:
 }
 
 
-#line 529 "parser.y"
+#line 541 "parser.y"
 
 main(int argc, char **argv)
 {
     init_symbol_table(); 
+    initQuad();
     yyparse();
     print_table();
+    printQuad();
 }
 
 yyerror(char *s)
