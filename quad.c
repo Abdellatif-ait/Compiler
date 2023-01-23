@@ -10,7 +10,7 @@ int nextquad() {
     return next_quad++;
 }
 
-void gen(char* op, int arg1, int arg2, int result) {
+void gen(char op[], int arg1, int arg2, int result) {
     strcpy(quadruples[next_quad].op ,op);
     quadruples[next_quad].arg1 = arg1;
     quadruples[next_quad].arg2 = arg2;

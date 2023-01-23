@@ -27,7 +27,7 @@ void init_symbol_table() {
     }
 }
 
-struct Symbol* lookup_symbol(char* name) {
+struct Symbol* lookup_symbol(char name[]) {
     for (int i = 0; i < symbol_table.count; i++) {
         if (strcmp(symbol_table.symbols[i].name, name) == 0 && symbol_table.symbols[i].scope_level == symbol_table.scope_level) {
             return &symbol_table.symbols[i];
@@ -36,7 +36,7 @@ struct Symbol* lookup_symbol(char* name) {
     return NULL;
 }
 
-void add_symbol(char* name, int type, int is_function, void* value) {
+void add_symbol(char name[], int type, int is_function, void* value) {
     if (lookup_symbol(name)!= NULL) {
         printf("Error: Redeclaration of symbol %s\n", name);
         return;
@@ -69,7 +69,7 @@ void exit_scope() {
     symbol_table.scope_level--;
 }
 
-void add_function_param(char* name, int type) {
+void add_function_param(char name[], int type) {
     struct Symbol* symbol = lookup_symbol(name);
     if (symbol == NULL) {
         printf("Error: Symbol %s not found\n", name);

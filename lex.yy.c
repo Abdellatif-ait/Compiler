@@ -1273,7 +1273,7 @@ YY_RULE_SETUP
 	printf("End of line",yytext);
 	printf(" at line %d on char %d  \n", yylineno,position);
 	position+=yyleng;
-	yylval.string=yytext;
+	strcpy(yylval.string,yytext);
 	return _SEMICOLON;
 
 }

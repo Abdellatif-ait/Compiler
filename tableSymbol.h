@@ -11,7 +11,7 @@ enum Type {
 };
 
 struct Symbol {
-    char* name;
+    char name[255];
     int type;
     void* value;
     int scope_level;
@@ -34,12 +34,12 @@ extern struct SymbolTable symbol_table;
 
 void init_symbol_table();
 
-struct Symbol* lookup_symbol(char*);
+struct Symbol* lookup_symbol(char name[]);
 
-void add_symbol(char*,int,int,void*);
+void add_symbol(char name[],int type,int isFunction,void* value);
 
 void enter_scope();
 
 void exit_scope();
 
-void add_function_param(char* name, int type);
+void add_function_param(char name[], int type);

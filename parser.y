@@ -16,7 +16,7 @@ int yyerror();
 %union {
     int integer;
     float real;
-    char* string;
+    char string[255];
     struct Symbol* symbol;
 }
 %token <string>_SCAN <string>_PRINT 
@@ -112,19 +112,19 @@ FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CUR
 }
 ;
 TYPE: _INT{
-    $$ = $1;
+    strcpy($$,$1);
 } 
 | _FLOAT {
-    $$ = $1;  
+    strcpy($$,$1);
 } 
 | _STRING{
-    $$ = $1;
+    strcpy($$,$1);
 } 
 | _BOOL{
-    $$ = $1;
+    strcpy($$,$1);
 } 
 | _VOID {
-    $$ = $1;
+    strcpy($$,$1);
 }
 ;
 PARAMS: DECLARATION_STATEMENT {

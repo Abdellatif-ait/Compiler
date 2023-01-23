@@ -113,7 +113,7 @@ union YYSTYPE
 
     int integer;
     float real;
-    char* string;
+    char string[255];
     struct Symbol* symbol;
 
 #line 120 "parser.tab.h"

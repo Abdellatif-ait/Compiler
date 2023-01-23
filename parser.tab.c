@@ -1464,7 +1464,7 @@ yyreduce:
   case 25: /* TYPE: _INT  */
 #line 114 "parser.y"
           {
-    (yyval.string) = (yyvsp[0].string);
+    strcpy((yyval.string),(yyvsp[0].string));
 }
 #line 1470 "parser.tab.c"
     break;
@@ -1472,7 +1472,7 @@ yyreduce:
   case 26: /* TYPE: _FLOAT  */
 #line 117 "parser.y"
          {
-    (yyval.string) = (yyvsp[0].string);  
+    strcpy((yyval.string),(yyvsp[0].string));
 }
 #line 1478 "parser.tab.c"
     break;
@@ -1480,7 +1480,7 @@ yyreduce:
   case 27: /* TYPE: _STRING  */
 #line 120 "parser.y"
          {
-    (yyval.string) = (yyvsp[0].string);
+    strcpy((yyval.string),(yyvsp[0].string));
 }
 #line 1486 "parser.tab.c"
     break;
@@ -1488,7 +1488,7 @@ yyreduce:
   case 28: /* TYPE: _BOOL  */
 #line 123 "parser.y"
        {
-    (yyval.string) = (yyvsp[0].string);
+    strcpy((yyval.string),(yyvsp[0].string));
 }
 #line 1494 "parser.tab.c"
     break;
@@ -1496,7 +1496,7 @@ yyreduce:
   case 29: /* TYPE: _VOID  */
 #line 126 "parser.y"
         {
-    (yyval.string) = (yyvsp[0].string);
+    strcpy((yyval.string),(yyvsp[0].string));
 }
 #line 1502 "parser.tab.c"
     break;
