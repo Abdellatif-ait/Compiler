@@ -1,19 +1,22 @@
 #define MAX_SYMBOLS 100
 
-enum Type {
+enum Type
+{
     INT,
     REAL,
     BOOL,
     STRING,
     VOID,
+    OBJECT,
     UNDEFINED,
     TABLEAU
 };
 
-struct Symbol {
+struct Symbol
+{
     char name[255];
     int type;
-    void* value;
+    void *value;
     int scope_level;
     int is_function;
     int falselist;
@@ -24,7 +27,8 @@ struct Symbol {
     int place;
 };
 
-struct SymbolTable {
+struct SymbolTable
+{
     struct Symbol symbols[MAX_SYMBOLS];
     int count;
     int scope_level;
@@ -34,12 +38,14 @@ extern struct SymbolTable symbol_table;
 
 void init_symbol_table();
 
-struct Symbol* lookup_symbol(char name[]);
+struct Symbol *lookup_symbol(char name[]);
 
-void add_symbol(char name[],int type,int isFunction,void* value);
+void add_symbol(char name[], int type, int isFunction, void *value);
 
 void enter_scope();
 
 void exit_scope();
 
 void add_function_param(char name[], int type);
+
+void print_table();

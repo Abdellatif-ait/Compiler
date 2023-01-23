@@ -1,7 +1,7 @@
 #define MAX_QUADRUPLES 1000
 
 struct Quadruple {
-    char op[];
+    char op[255];
     int arg1;
     int arg2;
     int result;

@@ -1,4 +1,9 @@
-int a;
+int a=2;
+h=1;
+float b=3.0;
+bool c;
+string x;
+const y=4;
 /*Hi this is a comment*/
 #this is a comment too
 function void myfunc(){};

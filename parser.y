@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include "tableSymbol.h"
-// #include "quad.h"
+#include "quad.h"
 
 
 
@@ -37,8 +37,8 @@ int yyerror();
 %right _POW _NOT
 %left _AND _OR _INFERIOR _SUPERIOR  _INFERIOR_EQUAL _SUPERIOR_EQUAL _EQUAL _NON_EQUAL
 
-%type <symbol>EXPRESSION <symbol>DECLARATION_STATEMENT <symbol>FUNCTION_INVOCATION_STATEMENT <symbol>PARAMS <symbol>FOR_STATEMENT <symbol>IF_STATEMENT <symbol>ELSE_STATEMENT <symbol>PROGRAM
-%type <string>TYPE 
+%type <symbol> EXPRESSION  DECLARATION_STATEMENT  FUNCTION_INVOCATION_STATEMENT  PARAMS  FOR_STATEMENT  IF_STATEMENT  ELSE_STATEMENT  PROGRAM
+%type <string> TYPE 
 %%
 
 PROGRAM: PROGRAM LINE {
@@ -69,7 +69,7 @@ IF_STATEMENT: _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BR
 | _IF _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET ELSE_STATEMENT{
     // int if_start = nextquad();
     // backpatch($3->falselist, if_start);
-    // backpatch($6->place, nextquad());
+    // // backpatch($6->place, nextquad());
 }
 ;
 ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET {
@@ -78,16 +78,16 @@ ELSE_STATEMENT: _ELSE _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET {
 }
 ;
 ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION {
-    // printf('assign statement');
-    // struct Symbol* var= lookup_symbol($1);
-    // if(var == NULL){
-    //     printf("Variable %s not declared \n", $1);
-    //     exit(1);
-    // }
-    // if(var->type != $3->type){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
+    printf('assign statement');
+    struct Symbol* var= lookup_symbol($1);
+    if(var == NULL){
+        printf("Variable %s not declared \n", $1);
+        exit(1);
+    }
+    if(var->type != $3->type){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
     // gen("EQ", $3->place, -1, var->place);
 }
 ;
@@ -100,15 +100,15 @@ FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSIO
 }
 ;
 WHILE_STATEMENT: _WHILE _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET{
-    // backpatch($3->truelist, nextquad());
-    // backpatch($5->falselist, nextquad());
+    // // // backpatch($3->truelist, nextquad());
+    // // // backpatch($5->falselist, nextquad());
 }
 ;
 FUNCTION_STATEMENT: _FUNCTION TYPE _ID _OPEN_PARENTHESIS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET{
-    // backpatch($7->falselist, nextquad());
+    // // backpatch($7->falselist, nextquad());
 }
 | _FUNCTION TYPE _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET{
-    // backpatch($8->falselist, nextquad());
+    // // backpatch($8->falselist, nextquad());
 }
 ;
 TYPE: _INT{
@@ -151,280 +151,274 @@ EXPRESSION_STATEMENT: EXPRESSION
 CLASS_STATEMENT: _CLASS _ID _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET
 ;
 DECLARATION_STATEMENT: _INT _ID {
-    // printf('declaration int statement');
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // int* value = malloc(sizeof(int));
-    // *value = 0;
-    // add_symbol($2, INT, 0, value);
+
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    int* value = malloc(sizeof(int));
+    *value = 0;
+    add_symbol($2, INT, 0, value);
 }
 | _FLOAT _ID {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // float* value = malloc(sizeof(float));
-    // *value = 0;
-    // add_symbol($2, REAL, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    float* value = malloc(sizeof(float));
+    *value = 0;
+    add_symbol($2, REAL, 0, value);
 }
 | _STRING _ID {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // char* value = malloc(sizeof(char)*100);
-    // strcpy(value, "");
-    // add_symbol($2, STRING, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    char* value = malloc(sizeof(char)*100);
+    strcpy(value, "");
+    add_symbol($2, STRING, 0, value);
 }
 | _BOOL _ID {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // bool* value = malloc(sizeof(bool));
-    // *value = false;
-    // add_symbol($2, BOOL, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    bool* value = malloc(sizeof(bool));
+    *value = false;
+    add_symbol($2, BOOL, 0, value);
 }
 | _TABLEAU _ID {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // int* value = malloc(sizeof(int));
-    // *value = 0;
-    // add_symbol($2, TABLEAU, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    int* value = malloc(sizeof(int));
+    *value = 0;
+    add_symbol($2, TABLEAU, 0, value);
 }
 | _ID _ID{
-  // TODO
+//   TODO
 }
 | _INT _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // if($4->type != INT){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    // int* value = malloc(sizeof(int));
-    // *value = $4->value;
-    // add_symbol($2, INT, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    if($4->type != INT){
+        printf("Type %s mismatch in assignment \n", $2);
+        exit(1);
+    }
+    add_symbol($2, INT, 0, $4->value);
 }
 | _FLOAT _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // if($4->type != REAL){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    // add_symbol($2, REAL, 0, 0);
-    // gen("EQ", $2, $4->value, -1);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    if($4->type != REAL){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
+    add_symbol($2, REAL, 0, $4->value);
 }
 | _STRING _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // if($4->type != STRING){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    // char* value = malloc(sizeof(char)*100);
-    // strcpy(value, $4->value);
-    // add_symbol($2, STRING, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    if($4->type != STRING){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
+    char* value = malloc(sizeof(char)*100);
+    add_symbol($2, STRING, 0, $4->value);
 }
 | _BOOL _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // if($4->type != BOOL){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    // bool* value = malloc(sizeof(bool));
-    // *value = $4->value;
-    // add_symbol($2, BOOL, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    if($4->type != BOOL){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
+    bool* value = malloc(sizeof(bool));
+    *value = $4->value;
+    add_symbol($2, BOOL, 0, value);
 }
 | _TABLEAU _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // if($4->type != TABLEAU){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    // int* value = malloc(sizeof(int));
-    // *value = $4->value;
-    // add_symbol($2, TABLEAU, 0, value);
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    if($4->type != TABLEAU){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
+    int* value = malloc(sizeof(int));
+    *value = $4->value;
+    add_symbol($2, TABLEAU, 0, value);
 }
 | _ID _ID _ASSIGN EXPRESSION {
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var == NULL){
-    //     printf("Variable %s not declared \n", $2);
-    //     exit(1);
-    // }
-    // if(var->type != $4->type){
-    //     printf("Type mismatch in assignment \n");
-    //     exit(1);
-    // }
-    /////////////////////////////// TODO 
+    struct Symbol* var = lookup_symbol($2);
+    if(var == NULL){
+        printf("Variable %s not declared \n", $2);
+        exit(1);
+    }
+    if(var->type != $4->type){
+        printf("Type mismatch in assignment \n");
+        exit(1);
+    }
+    ///////////////////////////// TODO 
 }
 | _CONST _ID _ASSIGN EXPRESSION {
-    //const declaration
-    // struct Symbol* var = lookup_symbol($2);
-    // if(var != NULL){
-    //     printf("Variable %s already declared \n", $2);
-    //     exit(1);
-    // }
-    // switch ($4->type)
-    // {
-    // case INT:
-    //     add_symbol($2, INT, 0, $4->value);
-    //     break;
-    // case REAL:
-    //     add_symbol($2, REAL, 0, $4->value);
-    //     break;
-    // case STRING:
-    //     add_symbol($2, STRING, 0, $4->value);
-    //     break;
-    // case BOOL:
-    //     add_symbol($2, BOOL, 0, $4->value);
-    //     break;
-    // case TABLEAU:
-    //     add_symbol($2, TABLEAU, 0, $4->value);
-    //     break;
-    // default:
-    //     break;
-    // }
+    struct Symbol* var = lookup_symbol($2);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $2);
+        exit(1);
+    }
+    switch ($4->type)
+    {
+    case INT:
+        add_symbol($2, INT, 0, $4->value);
+        break;
+    case REAL:
+        add_symbol($2, REAL, 0, $4->value);
+        break;
+    case STRING:
+        add_symbol($2, STRING, 0, $4->value);
+        break;
+    case BOOL:
+        add_symbol($2, BOOL, 0, $4->value);
+        break;
+    case TABLEAU:
+        add_symbol($2, TABLEAU, 0, $4->value);
+        break;
+    default:
+        break;
+    }
 }
 ;
-
 EXPRESSION: EXPRESSION _ADD EXPRESSION { 
-    // if($1->type != $3->type){
-    //     printf("Type mismatch in addition \n");
-    //     exit(1);
-    // }
+    if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
     // int quad= nextquad();
     // gen("ADD", $1->place, $3->place, quad);
 }
 | EXPRESSION _SUB EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("SUB", $1->place, $3->place, quad);
 }
 | EXPRESSION _MULT EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("MUL", $1->place, $3->place, quad);
 }
 | EXPRESSION _DIV EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("DIV", $1->place, $3->place, quad);
 }
 | EXPRESSION _MOD EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("MOD", $1->place, $3->place, quad);
 }
 | EXPRESSION _POW EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("POW", $1->place, $3->place, quad);
 }
 | EXPRESSION _AND EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("AND", $1->place, $3->place, quad);
 }
 | EXPRESSION _OR EXPRESSION  { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("OR", $1->place, $3->place, quad);
 }
 | EXPRESSION _INFERIOR EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("INF", $1->place, $3->place, quad);
 }
 | EXPRESSION _SUPERIOR EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("SUP", $1->place, $3->place, quad);
 }
 | EXPRESSION _INFERIOR_EQUAL EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("INFE", $1->place, $3->place, quad);
 }
 | EXPRESSION _SUPERIOR_EQUAL EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("SUPPE", $1->place, $3->place, quad);
 }
 | EXPRESSION _EQUAL EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("EQUAL", $1->place, $3->place, quad);
 }
 | EXPRESSION _NON_EQUAL EXPRESSION { 
-//   if($1->type != $3->type){
-//         printf("Type mismatch in addition \n");
-//         exit(1);
-//     }
-//     int quad= nextquad();
+  if($1->type != $3->type){
+        printf("Type mismatch in addition \n");
+        exit(1);
+    }
+    // int quad= nextquad();
     // gen("NEQUAL", $1->place, $3->place, quad);
 }
 | _OPEN_PARENTHESIS EXPRESSION _CLOSE_PARENTHESIS { 
@@ -436,62 +430,89 @@ EXPRESSION: EXPRESSION _ADD EXPRESSION {
     // gen("NOT", $2->place,-1, quad);
 }
 | _ID {
+    struct Symbol* var = lookup_symbol($1);
+    if(var != NULL){
+        printf("Variable %s already declared \n", $1);
+        exit(1);
+    }
+    $$=&var;
     // int quad= nextquad();
-    // gen("EQ", $1->place,-1, quad);
+    // // gen("EQ", $1->place,-1, quad);
 }
 | _INTVALUE {
-    // $$->type="INT";
-    // $$->value=$1;
+    struct Symbol symbol;
+    $$=&symbol;
+    $$->type=INT;
+    int* value = malloc(sizeof(int));
+    *value = $1;
+    $$->value=value;
 }
 | _FLOATVALUE {
-    // $$->type="FLOAT";
-    // $$->value=$1;
+    struct Symbol symbol;
+    $$=&symbol;
+    $$->type=REAL;
+    float* value = malloc(sizeof(float));
+    *value = $1;
+    $$->value = value;
 }
 | _BOOLVALUE {
-    // $$->type="BOOL";
+    struct Symbol symbol;
+    $$=&symbol;
+    bool* value = malloc(sizeof(bool));
+    *value = $1;
+    $$->value=value;
 }
 | _STRINGVALUE {
+    struct Symbol symbol;
+     $$=&symbol;
+    bool* value = malloc(sizeof(char[255]));
+    *value = $1;
+    $$->value=value;
 
 }
 | OBJECT_VALUE {
-    // $$=$1;
+    // struct Symbol symbol;
+    // $$=&symbol;
+    // int* value = malloc(sizeof(int));
+    // *value = $1;
+    // $$->value=value;
 }
 | _OPEN_BRACKET TABLEVALUE _CLOSE_BRACKET {
     // $$=$2;
 }
 | FUNCTION_INVOCATION_STATEMENT {
     // int quad= nextquad();
-    // // gen("EQ", $1->place,-1, quad);
+    //  gen("EQ", $1->place,-1, quad);
 }
 | ARRAY_ELEMENT {
-    // int quad= nextquad();
-    // // gen("EQ", $1->place,-1, quad);
+    // // int quad= nextquad();
+    // //  gen("EQ", $1->place,-1, quad);
 }
 
 ;
 FUNCTION_INVOCATION_STATEMENT : _ID _OPEN_PARENTHESIS PARAMS _CLOSE_PARENTHESIS {
-    // struct Symbol* var = lookup_symbol($1);
-    // if(var == NULL){
-    //     printf("Function %s not declared \n", $1);
-    //     exit(1);
-    // }
-    // if(var->is_function != 1){
-    //     printf("Variable %s is not a function \n", $1);
-    //     exit(1);
-    // }
+    struct Symbol* var = lookup_symbol($1);
+    if(var == NULL){
+        printf("Function %s not declared \n", $1);
+        exit(1);
+    }
+    if(var->is_function != 1){
+        printf("Variable %s is not a function \n", $1);
+        exit(1);
+    }
     // int quad= nextquad();
-    // // gen("EQ", var->place, -1, quad);
+    //  gen("EQ", var->place, -1, quad);
 }
 ;
 OBJECT_VALUE : OBJECT_VALUE _DOT _ID {}
 | _ID _DOT _ID{}
 ;
 ARRAY_ELEMENT : _ID _OPEN_BRACKET _INTVALUE _CLOSE_BRACKET {
-    // struct Symbol* var = lookup_symbol($1);
-    // if(var == NULL){
-    //     printf("Variable %s not declared \n", $1);
-    //     exit(1);
-    // }
+    struct Symbol* var = lookup_symbol($1);
+    if(var == NULL){
+        printf("Variable %s not declared \n", $1);
+        exit(1);
+    }
     
     // int quad= nextquad();
     // //gen("EQ", $1->place,-1, quad);
@@ -508,13 +529,13 @@ TABLEVALUE : TABLEVALUE _COMMA EXPRESSION
 %%
 main(int argc, char **argv)
 {
-    init_symbol_table();
+    init_symbol_table(); 
     yyparse();
-  // init symbol table
-    
+    print_table();
 }
 
 yyerror(char *s)
 {
   fprintf(stderr, "Error: %s\n", s);
+
 }
