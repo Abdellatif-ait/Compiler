@@ -91,6 +91,28 @@ ASSIGN_STATEMENT: _ID _ASSIGN EXPRESSION {
 }
 ;
 FOR_STATEMENT: _FOR _OPEN_PARENTHESIS DECLARATION_STATEMENT _SEMICOLON EXPRESSION _SEMICOLON EXPRESSION _CLOSE_PARENTHESIS _CURLY_OPEN_BRACKET PROGRAM _CURLY_CLOSE_BRACKET {
+    gen("for", 0, 0, 0); //quadruple for the start of the for loop
+    int for_start = nextquad(); //save the index of the for loop start quadruple
+
+//code for the initialization of the for loop variable
+
+    gen("INF", $3->value, $5->value, 0); //quadruple for the comparison of the for loop variable and the end value
+    int comparison = nextquad(); //save the index of the comparison quadruple
+
+    gen("jump", 0, 0, 0); //quadruple for jumping to the end of the for loop if the comparison is false
+    int jump_to_end = nextquad(); //save the index of the jump quadruple
+
+    //code for the body of the for loop
+    int* value = malloc(sizeof(int));
+    *value = 1;
+
+    gen("ADD", $3->value, value, $3->value); //quadruple for incrementing the for loop variable
+
+    gen("jump", for_start, 0, 0); //quadruple for jumping back to the start of the for loop
+    int jump_to_start = nextquad(); //save the index of the jump quadruple
+
+    //backpatch the comparison quadruple to jump to the end of the for loop if the comparison is false
+    backpatch(comparison, jump_to_end);
 
 }
 ;
@@ -210,6 +232,9 @@ DECLARATION_STATEMENT: _INT _ID {
         exit(1);
     }
     add_symbol($2, INT, 0, $4->value);
+    struct Symbol sym;
+    $$=&sym;
+    $$->value=$4->value;
 }
 | _FLOAT _ID _ASSIGN EXPRESSION {
     struct Symbol* var = lookup_symbol($2);

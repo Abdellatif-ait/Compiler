@@ -16,5 +16,3 @@ alpha=a+ab;
 for(int index=0;ab;index+1){
     a=a+1;
 };
-
-// nro7 njib code te3 for w nji
